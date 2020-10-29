@@ -57,14 +57,14 @@ class MainActivity:
 
 
     private fun initPresenter() {
-        val extras = intent.extras
-        if(extras == null) {
+
+        val fragments = intent.getParcelableArrayListExtra<FragmentModel>("list")
+        val currentItem = intent.getIntExtra("item", 1)
+
+        if (fragments != null) {
+            presenter.setData(fragments, currentItem)
+        } else  {
             presenter.init()
-        } else {
-            presenter.setData(
-                fragments = extras.getParcelableArrayList<FragmentModel>("list")!!,
-                currentItem = extras.getInt("item")
-            )
         }
     }
 
@@ -141,7 +141,7 @@ class MainActivity:
             putExtra("list", fragments)
         }
 
-        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getActivity(this, fragmentsNumber, intent, PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
 
