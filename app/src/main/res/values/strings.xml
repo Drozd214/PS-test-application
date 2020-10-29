@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PS Test</string>
+
+    <string name="create_new_notification">Create new\nnotification</string>
+</resources>
